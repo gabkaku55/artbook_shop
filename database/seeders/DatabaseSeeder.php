@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,13 +15,15 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        User::create([
-            'name' => 'Admin User',
-            'email' => 'yanapampukha2006@gmail.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('qwerty1234'),
-            'role' => 'admin',
-            'phone' => '+38 (044) 123-45-67',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'yanapampukha2006@gmail.com'],
+            [
+                'name' => 'Admin User',
+                'password' => Hash::make('qwerty1234'),
+                'role' => 'admin',
+                'phone' => '+38 (044) 123-45-67',
+            ]
+        );
 
         $categories = [
             ['name' => 'Аніме', 'slug' => 'anime'],
@@ -28,13 +33,18 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Інші', 'slug' => 'others'],
         ];
 
+        $categoryIds = [];
         foreach ($categories as $cat) {
-            \App\Models\Category::create($cat);
+            $category = Category::firstOrCreate(
+                ['slug' => $cat['slug']],
+                ['name' => $cat['name']]
+            );
+            $categoryIds[$cat['slug']] = $category->id;
         }
 
         $products = [
             [
-                'category_id' => 1,
+                'category_slug' => 'anime',
                 'name' => 'Мистецтво Віднесених привидами',
                 'slug' => 'art-of-spirited-away',
                 'author' => 'Хаяо Міядзакі',
@@ -45,7 +55,7 @@ class DatabaseSeeder extends Seeder
                 'is_popular' => true,
             ],
             [
-                'category_id' => 2,
+                'category_slug' => 'video-games',
                 'name' => 'Мистецтво Elden Ring',
                 'slug' => 'art-of-elden-ring',
                 'author' => 'FromSoftware',
@@ -56,7 +66,7 @@ class DatabaseSeeder extends Seeder
                 'is_popular' => true,
             ],
             [
-                'category_id' => 3,
+                'category_slug' => 'horror',
                 'name' => 'Артбук Джюндзі Іто',
                 'slug' => 'junji-ito-artbook',
                 'author' => 'Джюндзі Іто',
@@ -69,7 +79,13 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($products as $prod) {
-            \App\Models\Product::create($prod);
+            $categorySlug = $prod['category_slug'];
+            unset($prod['category_slug']);
+
+            Product::firstOrCreate(
+                ['slug' => $prod['slug']],
+                array_merge($prod, ['category_id' => $categoryIds[$categorySlug]])
+            );
         }
     }
 }
