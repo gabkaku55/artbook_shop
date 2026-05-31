@@ -108,4 +108,5 @@ return [
 'auth_code_placeholder' => 'Code',
 'auth_new_password_placeholder' => 'Neues Passwort',
 'auth_update_password' => 'Passwort aktualisieren',
+    'checkout_payment_abandoned' => 'Bestellung storniert. Sie können die Zahlungsart erneut wählen.',
 ];

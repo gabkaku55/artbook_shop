@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="py-12 bg-gray-950 min-h-screen flex items-center justify-center">
+<div class="page-chat py-12 bg-gray-950 min-h-screen flex items-center justify-center">
     <div class="max-w-4xl w-full px-4 sm:px-6 lg:px-8">
         <div class="bg-gray-900 rounded-[2.5rem] border border-gray-800 shadow-2xl overflow-hidden flex flex-col h-[700px]">
             <div class="p-8 border-b border-gray-800 bg-gray-800/30 flex items-center justify-between">

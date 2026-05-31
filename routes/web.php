@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\Admin\UnboxingVideoController as AdminUnboxingVideoController;
 
 Route::get('/lang/{locale}', [LanguageController::class, 'switch'])->name('lang.switch');
 
@@ -113,6 +114,17 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
             'destroy' => 'users.delete',
         ]);
     Route::post('/users/{user}/role', [AdminUserController::class, 'updateRole'])->name('users.role');
+
+    Route::resource('unboxing-videos', AdminUnboxingVideoController::class)
+        ->except(['show'])
+        ->names([
+            'index' => 'unboxing-videos.index',
+            'create' => 'unboxing-videos.create',
+            'store' => 'unboxing-videos.store',
+            'edit' => 'unboxing-videos.edit',
+            'update' => 'unboxing-videos.update',
+            'destroy' => 'unboxing-videos.delete',
+        ]);
 
     Route::get('/profile', [AdminProfileController::class, 'show'])->name('profile');
     Route::post('/profile', [AdminProfileController::class, 'update'])->name('profile.update');

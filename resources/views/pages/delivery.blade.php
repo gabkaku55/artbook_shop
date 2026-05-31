@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-gray-950 min-h-screen text-gray-300">
+<div class="page-delivery bg-gray-950 min-h-screen text-gray-300">
     <div class="relative py-24 overflow-hidden border-b border-gray-900">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 via-transparent to-transparent opacity-50"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -25,39 +25,39 @@
                     </h2>
                     
                     <div class="space-y-6">
-                        <div class="bg-gray-900/50 p-8 rounded-[2rem] border border-gray-800 hover:border-indigo-500/30 transition duration-500 group">
+                        <div class="delivery-method-card bg-gray-900/50 p-8 rounded-[2rem] border border-gray-800 hover:border-indigo-500/30 transition duration-500 group">
                             <div class="flex items-start gap-6">
                                 <div class="w-14 h-14 bg-gray-800 rounded-2xl flex items-center justify-center hidden">
                                 </div>
                                 <div class="flex-grow">
                                     <h3 class="text-lg font-black text-white uppercase tracking-tighter mb-2">{{ __('messages.online_payment') }}</h3>
-                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                    <p class="delivery-method-card-desc text-gray-400 text-sm leading-relaxed">
                                         {{ __('messages.online_payment_desc') }}
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bg-gray-900/50 p-8 rounded-[2rem] border border-gray-800 hover:border-indigo-500/30 transition duration-500 group">
+                        <div class="delivery-method-card bg-gray-900/50 p-8 rounded-[2rem] border border-gray-800 hover:border-indigo-500/30 transition duration-500 group">
                             <div class="flex items-start gap-6">
                                 <div class="w-14 h-14 bg-gray-800 rounded-2xl flex items-center justify-center hidden">
                                 </div>
                                 <div class="flex-grow">
                                     <h3 class="text-lg font-black text-white uppercase tracking-tighter mb-2">@if(app()->getLocale() == 'uk') Накладений платіж @elseif(app()->getLocale() == 'en') Cash on Delivery @else Nachnahme @endif</h3>
-                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                    <p class="delivery-method-card-desc text-gray-400 text-sm leading-relaxed">
                                         {{ __('messages.cod_desc') }}
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bg-gray-900/50 p-8 rounded-[2rem] border border-gray-800 hover:border-indigo-500/30 transition duration-500 group">
+                        <div class="delivery-method-card bg-gray-900/50 p-8 rounded-[2rem] border border-gray-800 hover:border-indigo-500/30 transition duration-500 group">
                             <div class="flex items-start gap-6">
                                 <div class="w-14 h-14 bg-gray-800 rounded-2xl flex items-center justify-center hidden">
                                 </div>
                                 <div class="flex-grow">
                                     <h3 class="text-lg font-black text-white uppercase tracking-tighter mb-2">@if(app()->getLocale() == 'uk') Оплата за реквізитами @elseif(app()->getLocale() == 'en') Bank Transfer @else Banküberweisung @endif</h3>
-                                    <p class="text-gray-400 text-sm leading-relaxed">
+                                    <p class="delivery-method-card-desc text-gray-400 text-sm leading-relaxed">
                                         {{ __('messages.bank_transfer_desc') }}
                                     </p>
                                 </div>
@@ -75,14 +75,14 @@
                     </h2>
                     
                     <div class="space-y-6">
-                        <div class="bg-gray-900/50 p-8 rounded-[2rem] border border-gray-800 hover:border-red-500/30 transition duration-500 group relative overflow-hidden">
+                        <div class="delivery-method-card bg-gray-900/50 p-8 rounded-[2rem] border border-gray-800 hover:border-red-500/30 transition duration-500 group relative overflow-hidden">
                             <div class="flex items-center gap-6 mb-6">
                                 <div class="w-20 h-12 bg-white rounded-xl flex items-center justify-center p-2 shadow-lg">
                                     <img src="{{ asset('images/nova-poshta.png') }}" class="w-full h-full object-contain" alt="Нова Пошта">
                                 </div>
                                 <h3 class="text-lg font-black text-white uppercase tracking-tighter">Нова Пошта</h3>
                             </div>
-                            <ul class="space-y-3 text-sm text-gray-400">
+                            <ul class="delivery-method-card-desc space-y-3 text-sm text-gray-400">
                                 <li class="flex items-center gap-3"><i class="fas fa-check text-red-500"></i> @if(app()->getLocale() == 'uk') У відділення по всій Україні @elseif(app()->getLocale() == 'en') To branches across Ukraine @else In Filialen in der ganzen Ukraine @endif</li>
                                 <li class="flex items-center gap-3"><i class="fas fa-check text-red-500"></i> @if(app()->getLocale() == 'uk') У поштомати (цілодобово) @elseif(app()->getLocale() == 'en') To post machines (24/7) @else In Postautomaten (24/7) @endif</li>
                                 <li class="pt-4 font-bold text-white flex justify-between items-center">
@@ -91,7 +91,7 @@
                             </ul>
                         </div>
 
-                        <div class="bg-gray-900/50 p-8 rounded-[2rem] border border-gray-800 hover:border-yellow-500/30 transition duration-500 group relative overflow-hidden">
+                        <div class="delivery-method-card bg-gray-900/50 p-8 rounded-[2rem] border border-gray-800 hover:border-yellow-500/30 transition duration-500 group relative overflow-hidden">
                             <div class="absolute -right-4 -top-4 opacity-[0.03] text-9xl group-hover:opacity-[0.07] transition duration-700">
                                 <i class="fas fa-mailbox"></i>
                             </div>
@@ -101,7 +101,7 @@
                                 </div>
                                 <h3 class="text-lg font-black text-white uppercase tracking-tighter">Укрпошта</h3>
                             </div>
-                            <ul class="space-y-3 text-sm text-gray-400">
+                            <ul class="delivery-method-card-desc space-y-3 text-sm text-gray-400">
                                 <li class="flex items-center gap-3"><i class="fas fa-check text-yellow-500"></i> {{ __('messages.ukrposhta_desc') }}</li>
                                 <li class="pt-4 font-bold text-white flex justify-between items-center">
                                     <span>{{ __('messages.delivery_time') }}: 3-7 {{ __('messages.days') }}</span>
@@ -109,14 +109,14 @@
                             </ul>
                         </div>
 
-                        <div class="bg-gray-900/50 p-8 rounded-[2rem] border border-gray-800 hover:border-indigo-500/30 transition duration-500 group relative overflow-hidden">
+                        <div class="delivery-method-card bg-gray-900/50 p-8 rounded-[2rem] border border-gray-800 hover:border-indigo-500/30 transition duration-500 group relative overflow-hidden">
                             <div class="flex items-center gap-6 mb-6">
                                 <div class="w-20 h-12 bg-gray-800 border border-gray-700 rounded-xl flex items-center justify-center text-indigo-500 text-xl shadow-lg">
                                     <i class="fas fa-store-alt"></i>
                                 </div>
                                 <h3 class="text-lg font-black text-white uppercase tracking-tighter">{{ __('messages.pickup') }}</h3>
                             </div>
-                            <p class="text-sm text-gray-400 mb-4">
+                            <p class="delivery-method-card-desc text-sm text-gray-400 mb-4">
                                 {{ __('messages.pickup_desc') }} <br>
                                 <span class="text-white font-bold">@if(app()->getLocale() == 'uk') м. Київ, вул. Хрещатик, 1 @elseif(app()->getLocale() == 'en') Kyiv, Khreshchatyk St, 1 @else Kiew, Chreschtschatyk-Str. 1 @endif</span>
                             </p>
@@ -131,11 +131,11 @@
         </div>
 
         <div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-gray-900/30 p-10 rounded-[2.5rem] border border-gray-800">
+            <div class="delivery-important-panel bg-gray-900/30 p-10 rounded-[2.5rem] border border-gray-800">
                 <h3 class="text-xl font-black text-white uppercase tracking-tighter mb-4 flex items-center">
                     <i class="fas fa-info-circle mr-3 text-indigo-500"></i> {{ __('messages.important_info') }}
                 </h3>
-                <ul class="space-y-4 text-sm text-gray-400">
+                <ul class="delivery-important-panel-text space-y-4 text-sm text-gray-400">
                     @if(app()->getLocale() == 'uk')
                         <li>• Замовлення, оформлені до 16:00, відправляються в той же день.</li>
                         <li>• Після відправки ви отримаєте SMS з номером ТТН.</li>
@@ -151,7 +151,7 @@
                     @endif
                 </ul>
             </div>
-            <div class="bg-indigo-600/10 p-10 rounded-[2.5rem] border border-indigo-500/20">
+            <div class="delivery-returns-panel bg-indigo-600/10 p-10 rounded-[2.5rem] border border-indigo-500/20">
                 <h3 class="text-xl font-black text-white uppercase tracking-tighter mb-4 flex items-center">
                     <i class="fas fa-undo-alt mr-3 text-indigo-400"></i> {{ __('messages.returns_exchanges') }}
                 </h3>

@@ -10,8 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->boolean('abandon_bank')) {
+            session()->forget('pending_bank_checkout');
+        }
+
         $cart = session()->get('cart', []);
         if (empty($cart)) {
             return redirect()->route('cart.index')->with('error', 'Ваш кошик порожній.');
@@ -213,18 +217,40 @@ class CheckoutController extends Controller
         return back()->with('success', __('messages.receipt_uploaded'));
     }
 
-    public function cancelOrder(Order $order)
+    public function cancelOrder(Request $request, Order $order)
     {
-        if ($order->user_id === auth()->id() && $order->status === 'pending') {
-            $order->update(['status' => 'cancelled']);
-
-            foreach ($order->items as $item) {
-                $item->product->increment('stock', $item->quantity);
-            }
-
-            return back()->with('success', 'Замовлення успішно скасовано.');
+        if ($order->user_id !== auth()->id() || $order->status !== 'pending') {
+            return back()->with('error', 'Це замовлення не можна скасувати.');
         }
-        return back()->with('error', 'Це замовлення не можна скасувати.');
+
+        $order->load('items');
+
+        foreach ($order->items as $item) {
+            $product = Product::find($item->product_id);
+            if ($product) {
+                $product->increment('stock', $item->quantity);
+            }
+        }
+
+        $backToCheckout = $request->input('redirect_after_cancel') === 'checkout';
+        if ($backToCheckout) {
+            $cart = [];
+            foreach ($order->items as $item) {
+                $cart[$item->product_id] = [
+                    'id' => $item->product_id,
+                    'quantity' => $item->quantity,
+                ];
+            }
+            session()->put('cart', $cart);
+        }
+
+        $order->update(['status' => 'cancelled']);
+
+        if ($backToCheckout) {
+            return redirect()->route('checkout')->with('success', __('messages.checkout_payment_abandoned'));
+        }
+
+        return back()->with('success', 'Замовлення успішно скасовано.');
     }
 
     public function showOrder(Order $order)

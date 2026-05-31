@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-gray-950 min-h-screen text-gray-300">
+<div class="page-contacts bg-gray-950 min-h-screen text-gray-300">
     <div class="relative py-24 overflow-hidden border-b border-gray-900">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 via-transparent to-transparent opacity-50"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -17,7 +17,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
             
-            <div class="bg-gray-900/50 p-10 rounded-[2.5rem] border border-gray-800 hover:border-indigo-500/30 transition duration-500 group text-center">
+            <div class="contact-card-soft contact-card-soft-light bg-gray-900/50 p-10 rounded-[2.5rem] border border-gray-800 hover:border-indigo-500/30 transition duration-500 group text-center">
                 <div class="w-20 h-20 bg-gray-800 rounded-3xl flex items-center justify-center mx-auto mb-8 text-indigo-500 group-hover:bg-indigo-600 group-hover:text-white transition duration-500 shadow-xl">
                     <i class="fas fa-map-marker-alt text-3xl"></i>
                 </div>
@@ -39,7 +39,7 @@
                 </p>
             </div>
 
-            <div class="bg-gray-900/50 p-10 rounded-[2.5rem] border border-gray-800 hover:border-indigo-500/30 transition duration-500 group text-center">
+            <div class="contact-card-soft contact-card-soft-light bg-gray-900/50 p-10 rounded-[2.5rem] border border-gray-800 hover:border-indigo-500/30 transition duration-500 group text-center">
                 <div class="w-20 h-20 bg-gray-800 rounded-3xl flex items-center justify-center mx-auto mb-8 text-indigo-500 group-hover:bg-indigo-600 group-hover:text-white transition duration-500 shadow-xl">
                     <i class="fas fa-phone-alt text-3xl"></i>
                 </div>
@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <div class="bg-gray-900/50 p-10 rounded-[2.5rem] border border-gray-800 hover:border-indigo-500/30 transition duration-500 group text-center">
+            <div class="contact-card-soft contact-card-soft-light bg-gray-900/50 p-10 rounded-[2.5rem] border border-gray-800 hover:border-indigo-500/30 transition duration-500 group text-center">
                 <div class="w-20 h-20 bg-gray-800 rounded-3xl flex items-center justify-center mx-auto mb-8 text-indigo-500 group-hover:bg-indigo-600 group-hover:text-white transition duration-500 shadow-xl">
                     <i class="fas fa-share-alt text-3xl"></i>
                 </div>
@@ -74,7 +74,7 @@
         </div>
 
         <div class="mt-20 grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div class="bg-gray-900/30 p-12 rounded-[3rem] border border-gray-800 flex flex-col justify-center">
+            <div class="contact-hours-panel bg-gray-900/30 p-12 rounded-[3rem] border border-gray-800 flex flex-col justify-center">
                 <h3 class="text-2xl font-black text-white uppercase tracking-tighter mb-8 flex items-center">
                     <i class="fas fa-clock mr-4 text-indigo-500"></i> @if(app()->getLocale() == 'uk') Графік роботи @elseif(app()->getLocale() == 'en') Working Hours @else Arbeitszeit @endif
                 </h3>
@@ -92,14 +92,14 @@
                         <span class="text-white font-black uppercase tracking-tighter">12:00 — 18:00</span>
                     </div>
                 </div>
-                <div class="mt-12 p-6 bg-indigo-600/10 border border-indigo-500/20 rounded-2xl">
+                <div class="contact-hours-highlight mt-12 p-6 bg-indigo-600/10 border border-indigo-500/20 rounded-2xl">
                     <p class="text-sm text-indigo-400 leading-relaxed text-center">
                         <i class="fas fa-info-circle mr-2"></i> @if(app()->getLocale() == 'uk') Онлайн-замовлення приймаються цілодобово 24/7 @elseif(app()->getLocale() == 'en') Online orders are accepted 24/7 @else Online-Bestellungen werden rund um die Uhr entgegengenommen @endif
                     </p>
                 </div>
             </div>
 
-            <div class="bg-gray-900 rounded-[3rem] border border-gray-800 overflow-hidden relative min-h-[400px] group">
+            <div class="contact-map-keep-dark bg-gray-900 rounded-[3rem] border border-gray-800 overflow-hidden relative min-h-[400px] group">
                 <img src="{{ asset('images/map-location.png') }}" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 group-hover:opacity-100 transition duration-1000" alt="Наша локація">
                 <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-80"></div>
                 <div class="absolute bottom-10 left-10 right-10 flex flex-col md:flex-row justify-between items-end gap-6">
@@ -114,7 +114,7 @@
             </div>
         </div>
 
-        <div class="mt-20 bg-indigo-600 rounded-[3rem] p-12 lg:p-20 text-center relative overflow-hidden shadow-2xl shadow-indigo-500/20">
+        <div class="contact-cta-questions mt-20 bg-indigo-600 rounded-[3rem] p-12 lg:p-20 text-center relative overflow-hidden shadow-2xl shadow-indigo-500/20">
             <div class="relative z-10">
                 <h2 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-8">@if(app()->getLocale() == 'uk') Залишилися питання? @elseif(app()->getLocale() == 'en') Still have questions? @else Haben Sie noch Fragen? @endif</h2>
                 <p class="text-indigo-100 text-xl max-w-2xl mx-auto mb-12">

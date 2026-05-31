@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="py-12 bg-gray-950 min-h-screen">
+<div class="page-profile py-12 bg-gray-950 min-h-screen">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 class="text-4xl font-black text-white mb-12 uppercase tracking-tighter">@if(app()->getLocale() == 'uk') Особистий кабінет @elseif(app()->getLocale() == 'en') Personal Profile @else Persönliches Profil @endif</h1>
 

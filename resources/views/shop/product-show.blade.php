@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="py-12 bg-gray-950 min-h-screen">
+<div class="page-product py-12 bg-gray-950 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row gap-12">
             <div class="w-full md:w-1/2">
@@ -124,7 +124,7 @@
                     </div>
                 </div>
 
-                <div class="mb-12 p-5 rounded-2xl {{ $product->stock > 0 ? 'bg-green-900/20 text-green-400 border border-green-500/20' : 'bg-red-950/40 text-red-500 border border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.2)]' }} flex items-center shadow-sm">
+                <div class="product-stock-banner mb-12 p-5 rounded-2xl {{ $product->stock > 0 ? 'bg-green-900/20 text-green-400 border border-green-500/20 product-stock-banner--in-stock' : 'bg-red-950/40 text-red-500 border border-red-600 shadow-[0_0_20px_rgba(220,38,38,0.2)]' }} flex items-center shadow-sm">
                     <i class="fas {{ $product->stock > 0 ? 'fa-check-circle' : 'fa-times-circle' }} mr-3 text-xl"></i>
                     <span class="font-black tracking-wide uppercase text-sm">
                         @if($product->stock > 0)
@@ -197,8 +197,8 @@
                             </form>
                         </div>
                     @else
-                        <div class="bg-indigo-900/20 p-10 rounded-3xl border border-indigo-500/20 text-center shadow-sm">
-                            <p class="text-indigo-200 font-bold text-lg mb-6 leading-relaxed">@if(app()->getLocale() == 'uk') Бажаєте поділитися своїм досвідом? @elseif(app()->getLocale() == 'en') Want to share your experience? @else Möchten Sie Ihre Erfahrung teilen? @endif</p>
+                        <div class="review-login-card bg-indigo-900/20 p-10 rounded-3xl border border-indigo-500/20 text-center shadow-sm">
+                            <p class="review-login-text text-indigo-200 font-bold text-lg mb-6 leading-relaxed">@if(app()->getLocale() == 'uk') Бажаєте поділитися своїм досвідом? @elseif(app()->getLocale() == 'en') Want to share your experience? @else Möchten Sie Ihre Erfahrung teilen? @endif</p>
                             <a href="{{ route('login') }}" class="inline-block bg-indigo-600 text-white px-8 py-3 rounded-xl font-black hover:bg-indigo-700 transition shadow-lg shadow-indigo-500/20">@if(app()->getLocale() == 'uk') Увійти для відгуку @elseif(app()->getLocale() == 'en') Login to Review @else Anmelden für Bewertung @endif</a>
                         </div>
                     @endauth
@@ -206,7 +206,7 @@
 
                 <div class="lg:col-span-2 space-y-12">
                     @forelse($product->reviews as $review)
-                        <div class="pb-10 border-b border-gray-900 last:border-0">
+                        <div class="review-item pb-10 border-b border-gray-900 last:border-0">
                             <div class="flex items-center justify-between mb-6">
                                 <div class="flex items-center gap-4">
                                     <div class="w-12 h-12 rounded-2xl overflow-hidden border border-indigo-500/20 shadow-sm">
@@ -232,9 +232,9 @@
                             <p class="text-gray-400 leading-relaxed text-lg italic">"{{ $review->comment }}"</p>
                         </div>
                     @empty
-                        <div class="text-center py-20 bg-gray-900/50 rounded-3xl border border-gray-800/50">
+                        <div class="reviews-empty text-center py-20 bg-gray-900/50 rounded-3xl border border-gray-800/50">
                             <i class="fas fa-comments text-5xl text-gray-800 mb-6 block"></i>
-                            <p class="text-gray-500 font-medium">@if(app()->getLocale() == 'uk') Ще немає відгуків. Будьте першим! @elseif(app()->getLocale() == 'en') No reviews yet. Be the first! @else Noch keine Bewertungen. Seien Sie der Erste! @endif</p>
+                            <p class="reviews-empty-text text-gray-500 font-medium">@if(app()->getLocale() == 'uk') Ще немає відгуків. Будьте першим! @elseif(app()->getLocale() == 'en') No reviews yet. Be the first! @else Noch keine Bewertungen. Seien Sie der Erste! @endif</p>
                         </div>
                     @endforelse
                 </div>

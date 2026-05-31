@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="relative h-screen min-h-[600px] flex items-center overflow-hidden bg-gray-950">
-    <div class="absolute inset-0 z-0">
-        <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-50">
+<section class="home-hero relative h-screen min-h-[600px] flex items-center overflow-hidden bg-gray-950">
+    <div class="home-hero-video-wrap absolute inset-0 z-0 overflow-hidden">
+        <video id="hero-bg-video" autoplay muted loop playsinline class="w-full h-full object-cover opacity-50" data-src-dark="{{ asset('video/VideoProject1.mp4') }}" data-src-light="{{ asset('video/video2tem.mp4') }}">
             <source src="{{ asset('video/VideoProject1.mp4') }}" type="video/mp4">
             Ваш браузер не підтримує відео.
         </video>
-        <div class="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-gray-950 opacity-80"></div>
+        <div class="hero-gradient-overlay absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-gray-950 opacity-80"></div>
     </div>
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center md:text-left">
@@ -50,14 +50,14 @@
         </a>
     </div>
 
-    <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180">
+    <div class="home-hero-wave absolute bottom-0 left-0 w-full overflow-hidden leading-[0] transform rotate-180 pointer-events-none">
         <svg class="relative block w-[calc(100%+1.3px)] h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
             <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-gray-950"></path>
         </svg>
     </div>
 </section>
 
-<div class="shared-bg">
+<div class="shared-bg home-shared-sections">
 <section class="py-24 overflow-hidden">
     <div id="popular" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
@@ -79,7 +79,7 @@
             <div class="swiper-wrapper">
                 @foreach($popularProducts as $product)
                     <div class="swiper-slide">
-                        <div class="group">
+                        <div class="group home-product-card">
                             <div class="relative overflow-hidden rounded-2xl bg-gray-800 aspect-[3/4] mb-6 shadow-lg group-hover:shadow-indigo-500/10 transition duration-500">
                                 @if($product->image)
                                     <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="{{ $product->translated_name }}">
@@ -120,7 +120,7 @@
                                 @if($product->stock > 0)
                                     <form action="{{ route('cart.add', $product->id) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="bg-gray-800 p-3 rounded-xl hover:bg-indigo-600 text-gray-300 hover:text-white transition">
+                                        <button type="submit" class="home-add-cart bg-gray-800 p-3 rounded-xl hover:bg-indigo-600 text-gray-300 hover:text-white transition">
                                             <i class="fas fa-cart-plus text-lg"></i>
                                         </button>
                                     </form>
@@ -157,7 +157,7 @@
             <div class="swiper-wrapper">
                 @foreach($newArrivals as $product)
                     <div class="swiper-slide">
-                        <div class="group">
+                        <div class="group home-product-card">
                             <div class="relative overflow-hidden rounded-2xl bg-gray-800 aspect-[3/4] mb-6 shadow-lg group-hover:shadow-indigo-500/10 transition duration-500">
                                 @if($product->image)
                                     <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="{{ $product->translated_name }}">
@@ -198,7 +198,7 @@
                                 @if($product->stock > 0)
                                     <form action="{{ route('cart.add', $product->id) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="bg-gray-800 p-3 rounded-xl hover:bg-indigo-600 text-gray-300 hover:text-white transition">
+                                        <button type="submit" class="home-add-cart bg-gray-800 p-3 rounded-xl hover:bg-indigo-600 text-gray-300 hover:text-white transition">
                                             <i class="fas fa-cart-plus text-lg"></i>
                                         </button>
                                     </form>
@@ -216,49 +216,94 @@
     </div>
 </section>
 
-<section class="py-24 overflow-hidden">
+<section class="py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-16">
             <h2 class="text-4xl font-bold text-white tracking-tight">@if(app()->getLocale() == 'uk') Відео розпаковок @elseif(app()->getLocale() == 'en') Video Unboxings @else Video-Unboxings @endif</h2>
             <div class="h-1.5 w-20 bg-indigo-600 mt-4 rounded-full"></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            @php
-                $videos = [
-                    [
-                        'file' => 'MassEffect.mp4',
-                        'title' => ['uk' => 'Ігровий світ трилогії Mass Effect', 'en' => 'Game World of Mass Effect Trilogy', 'de' => 'Spielwelt der Mass-Effect-Trilogie'],
-                        'desc' => ['uk' => 'Поглиблений огляд артбуку: концепт-арт, персонажі та локації з культової космічної саги BioWare.', 'en' => 'In-depth artbook review: concept art, characters and locations from the iconic BioWare space saga.', 'de' => 'Detaillierter Artbook-Überblick: Konzeptkunst, Charaktere und Schauplätze der Kult-Raumsaga von BioWare.'],
-                    ],
-                    [
-                        'file' => 'DeathStranding.mp4',
-                        'title' => ['uk' => 'Світ гри Death Stranding 2: On the Beach', 'en' => 'World of Death Stranding 2: On the Beach', 'de' => 'Welt von Death Stranding 2: On the Beach'],
-                        'desc' => ['uk' => 'Ексклюзивний огляд артбуку: унікальна візуальна естетика та арт від Kojima Productions.', 'en' => 'Exclusive artbook review: unique visual aesthetic and art from Kojima Productions.', 'de' => 'Exklusiver Artbook-Überblick: einzigartige visuelle Ästhetik und Kunst von Kojima Productions.'],
-                    ],
-                    [
-                        'file' => 'arkrein.mp4',
-                        'title' => ['uk' => 'Мистецтво й створення серіалу «Аркейн»', 'en' => 'Art and Creation of Arcane Series', 'de' => 'Kunst und Entstehung der Serie Arcane'],
-                        'desc' => ['uk' => 'За лаштунками серіалу: від ескізів до фінальної анімації. Огляд артбуку від Fortiche та Riot.', 'en' => 'Behind the scenes: from sketches to final animation. Artbook review by Fortiche and Riot.', 'de' => 'Hinter den Kulissen: von Skizzen zur Endanimation. Artbook-Überblick von Fortiche und Riot.'],
-                    ],
-                ];
-            @endphp
-            @foreach($videos as $video)
-                <div class="bg-gray-900 rounded-[2rem] overflow-hidden border border-gray-800 group">
+        <div
+            class="home-unboxing-scroll flex flex-nowrap gap-6 md:gap-8 overflow-x-auto overflow-y-visible pb-4 scroll-smooth snap-x snap-mandatory -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 overscroll-x-contain">
+            @forelse($unboxingVideos as $video)
+                <div
+                    class="home-unboxing-card flex-shrink-0 w-[min(88vw,20.5rem)] sm:w-[min(75vw,24rem)] md:w-[26rem] snap-start bg-gray-900 rounded-[2rem] overflow-hidden border border-gray-800 group">
                     <div class="relative aspect-video">
                         <video class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition" controls>
-                            <source src="{{ asset('video/' . $video['file']) }}" type="video/mp4">
+                            <source src="{{ asset($video->video_path) }}">
                         </video>
                         <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60"></div>
                     </div>
                     <div class="p-8">
-                        <h3 class="text-xl font-bold text-white mb-2">{{ $video['title'][app()->getLocale()] ?? $video['title']['en'] }}</h3>
+                        <h3 class="text-xl font-bold text-white mb-2">{{ $video->title }}</h3>
                         <p class="text-gray-400 text-sm leading-relaxed">
-                            {{ $video['desc'][app()->getLocale()] ?? $video['desc']['en'] }}
+                            {{ $video->description }}
                         </p>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                @php
+                    $fallbackVideos = [
+                        [
+                            'video_path' => 'video/MassEffect.mp4',
+                            'title' => [
+                                'uk' => 'Ігровий світ трилогії Mass Effect',
+                                'en' => 'Game World of Mass Effect Trilogy',
+                                'de' => 'Spielwelt der Mass-Effect-Trilogie',
+                            ],
+                            'description' => [
+                                'uk' => 'Поглиблений огляд артбуку: концепт-арт, персонажі та локації з культової космічної саги BioWare.',
+                                'en' => 'In-depth artbook review: concept art, characters and locations from the iconic BioWare space saga.',
+                                'de' => 'Detaillierter Artbook-Überblick: Konzeptkunst, Charaktere und Schauplätze der Kult-Raumsaga von BioWare.',
+                            ],
+                        ],
+                        [
+                            'video_path' => 'video/DeathStranding.mp4',
+                            'title' => [
+                                'uk' => 'Світ гри Death Stranding 2: On the Beach',
+                                'en' => 'World of Death Stranding 2: On the Beach',
+                                'de' => 'Welt von Death Stranding 2: On the Beach',
+                            ],
+                            'description' => [
+                                'uk' => 'Ексклюзивний огляд артбуку: унікальна візуальна естетика та арт від Kojima Productions.',
+                                'en' => 'Exclusive artbook review: unique visual aesthetic and art from Kojima Productions.',
+                                'de' => 'Exklusiver Artbook-Überblick: einzigartige visuelle Ästhetik und Kunst von Kojima Productions.',
+                            ],
+                        ],
+                        [
+                            'video_path' => 'video/arkrein.mp4',
+                            'title' => [
+                                'uk' => 'Мистецтво й створення серіалу «Аркейн»',
+                                'en' => 'Art and Creation of Arcane Series',
+                                'de' => 'Kunst und Entstehung der Serie Arcane',
+                            ],
+                            'description' => [
+                                'uk' => 'За лаштунками серіалу: від ескізів до фінальної анімації. Огляд артбуку від Fortiche та Riot.',
+                                'en' => 'Behind the scenes: from sketches to final animation. Artbook review by Fortiche and Riot.',
+                                'de' => 'Hinter den Kulissen: von Skizzen zur Endanimation. Artbook-Überblick von Fortiche und Riot.',
+                            ],
+                        ],
+                    ];
+                @endphp
+
+                @foreach($fallbackVideos as $video)
+                    <div
+                        class="home-unboxing-card flex-shrink-0 w-[min(88vw,20.5rem)] sm:w-[min(75vw,24rem)] md:w-[26rem] snap-start bg-gray-900 rounded-[2rem] overflow-hidden border border-gray-800 group">
+                        <div class="relative aspect-video">
+                            <video class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition" controls>
+                                <source src="{{ asset($video['video_path']) }}" type="video/mp4">
+                            </video>
+                            <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60"></div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-xl font-bold text-white mb-2">{{ $video['title'][app()->getLocale()] ?? $video['title']['en'] }}</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed">
+                                {{ $video['description'][app()->getLocale()] ?? $video['description']['en'] }}
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
+            @endforelse
         </div>
     </div>
 </section>

@@ -23,6 +23,9 @@
                         <a href="{{ route('admin.users.index') }}" class="flex items-center px-5 py-4 rounded-2xl transition font-bold {{ request()->routeIs('admin.users.*') ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
                             <i class="fas fa-users mr-4 w-5"></i> Користувачі
                         </a>
+                        <a href="{{ route('admin.unboxing-videos.index') }}" class="flex items-center px-5 py-4 rounded-2xl transition font-bold {{ request()->routeIs('admin.unboxing-videos.*') ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
+                            <i class="fas fa-video mr-4 w-5"></i> Відео розпаковок
+                        </a>
                         <a href="{{ route('admin.profile') }}" class="flex items-center px-5 py-4 rounded-2xl transition font-bold {{ request()->routeIs('admin.profile') ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/20' : 'text-gray-400 hover:bg-gray-800 hover:text-white' }}">
                             <i class="fas fa-user-shield mr-4 w-5"></i> Профіль
                         </a>

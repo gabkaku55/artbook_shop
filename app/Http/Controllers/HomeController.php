@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Order;
+use App\Models\UnboxingVideo;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        UnboxingVideo::syncLegacyDefaults();
+
         $newArrivals = Product::where('is_new', true)->latest()->take(10)->get();
         $popularProducts = Product::where('is_popular', true)->take(10)->get();
-        return view('pages.home', compact('newArrivals', 'popularProducts'));
+        $unboxingVideos = UnboxingVideo::latest()->get();
+
+        return view('pages.home', compact('newArrivals', 'popularProducts', 'unboxingVideos'));
     }
 
     public function profile()

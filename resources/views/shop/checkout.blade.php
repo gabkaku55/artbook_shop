@@ -1,11 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="py-12 bg-gray-950 min-h-screen">
+@php
+    $cartLinkLabel = app()->getLocale() == 'uk' ? 'Перейти до кошика' : (app()->getLocale() == 'en' ? 'Go to cart' : 'Zum Warenkorb');
+@endphp
+<div class="page-checkout py-12 bg-gray-950 min-h-screen">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-4xl font-black text-white mb-12 text-center uppercase tracking-tighter">
-            @if(app()->getLocale() == 'uk') Оформлення замовлення @elseif(app()->getLocale() == 'en') Checkout @else Kasse @endif
-        </h1>
+        <div class="max-w-5xl mx-auto mb-8 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <h1 class="text-4xl font-black text-white text-center sm:text-left uppercase tracking-tighter">
+                @if(app()->getLocale() == 'uk') Оформлення замовлення @elseif(app()->getLocale() == 'en') Checkout @else Kasse @endif
+            </h1>
+            <a href="{{ route('cart.index') }}" class="group mx-auto sm:mx-0 inline-flex items-center gap-2 self-center sm:self-auto text-xs font-black uppercase tracking-[0.18em] text-gray-500 hover:text-indigo-400 transition-colors">
+                <span class="order-2 sm:order-1">{{ $cartLinkLabel }}</span>
+                <span class="order-1 sm:order-2 flex h-10 w-10 items-center justify-center rounded-full border border-gray-800 bg-gray-900/80 text-gray-400 shadow-sm group-hover:border-indigo-500/40 group-hover:bg-indigo-950/30 group-hover:text-indigo-400 transition-all" aria-hidden="true">
+                    <i class="fas fa-shopping-basket text-sm"></i>
+                </span>
+            </a>
+        </div>
 
         <div class="max-w-5xl mx-auto" x-data="{
             shippingMethod: 'Nova Poshta',
@@ -56,7 +67,7 @@
 
                     <div class="bg-gray-900 p-10 rounded-3xl border border-gray-800 shadow-xl">
                         <h3 class="text-2xl font-bold text-white mb-10 flex items-center">
-                            <div class="w-10 h-10 bg-pink-900/50 text-pink-400 rounded-xl flex items-center justify-center mr-4 border border-pink-500/20">
+                            <div class="checkout-delivery-heading-icon w-10 h-10 bg-pink-900/50 text-pink-400 rounded-xl flex items-center justify-center mr-4 border border-pink-500/20">
                                 <i class="fas fa-truck"></i>
                             </div>
                             @if(app()->getLocale() == 'uk') Доставка @elseif(app()->getLocale() == 'en') Shipping @else Versand @endif

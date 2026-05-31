@@ -58,7 +58,7 @@
                 @else
                     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
                         @foreach($products as $product)
-                            <div class="bg-gray-900 rounded-2xl shadow-lg border border-gray-800 overflow-hidden hover:border-indigo-500/30 transition duration-300">
+                            <div class="catalog-product-card bg-gray-900 rounded-2xl shadow-lg border border-gray-800 overflow-hidden hover:border-indigo-500/30 transition duration-300">
                                 <a href="{{ route('product.show', $product->slug) }}">
                                     <div class="relative aspect-[3/4]">
                                         @if($product->image)

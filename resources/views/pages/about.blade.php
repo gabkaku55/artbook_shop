@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-gray-950 min-h-screen text-gray-300">
+<div class="page-about bg-gray-950 min-h-screen text-gray-300">
     <div class="relative py-32 overflow-hidden border-b border-gray-900">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 via-transparent to-transparent opacity-50"></div>
         
@@ -38,13 +38,13 @@
                         </p>
                     </div>
                     <div class="grid grid-cols-2 gap-8">
-                        <div class="bg-gray-900/50 p-6 rounded-3xl border border-gray-800">
+                        <div class="about-stat-card bg-gray-900/50 p-6 rounded-3xl border border-gray-800">
                             <p class="text-4xl font-black text-indigo-500 mb-2">100%</p>
-                            <p class="text-xs font-bold uppercase tracking-widest text-gray-500">@if(app()->getLocale() == 'uk') Оригінальність @elseif(app()->getLocale() == 'en') Originality @else Originalität @endif</p>
+                            <p class="about-stat-card-label text-xs font-bold uppercase tracking-widest text-gray-500">@if(app()->getLocale() == 'uk') Оригінальність @elseif(app()->getLocale() == 'en') Originality @else Originalität @endif</p>
                         </div>
-                        <div class="bg-gray-900/50 p-6 rounded-3xl border border-gray-800">
+                        <div class="about-stat-card bg-gray-900/50 p-6 rounded-3xl border border-gray-800">
                             <p class="text-4xl font-black text-indigo-500 mb-2">5000+</p>
-                            <p class="text-xs font-bold uppercase tracking-widest text-gray-500">@if(app()->getLocale() == 'uk') Доставлених книг @elseif(app()->getLocale() == 'en') Delivered Books @else Gelieferte Bücher @endif</p>
+                            <p class="about-stat-card-label text-xs font-bold uppercase tracking-widest text-gray-500">@if(app()->getLocale() == 'uk') Доставлених книг @elseif(app()->getLocale() == 'en') Delivered Books @else Gelieferte Bücher @endif</p>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <div class="py-24 border-b border-gray-900 bg-gray-900/20">
+    <div class="about-history-section py-24 border-b border-gray-900 bg-gray-900/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-20">
                 <h2 class="text-4xl font-black text-white uppercase tracking-tighter mb-4">@if(app()->getLocale() == 'uk') Історія та Розвиток @elseif(app()->getLocale() == 'en') History & Development @else Geschichte & Entwicklung @endif</h2>
@@ -118,23 +118,23 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gray-900/50 p-10 rounded-[2.5rem] border border-gray-800 hover:border-indigo-500/50 transition duration-500 group">
+                <div class="about-feature-card about-feature-card-soft bg-gray-900/50 p-10 rounded-[2.5rem] border border-gray-800 hover:border-indigo-500/50 transition duration-500 group">
                     <h3 class="text-xl font-black text-white uppercase tracking-tighter mb-4">@if(app()->getLocale() == 'uk') Безкомпромісна якість @elseif(app()->getLocale() == 'en') Uncompromising Quality @else Kompromisslose Qualität @endif</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm">
+                    <p class="about-feature-card-text text-gray-400 leading-relaxed text-sm">
                         @if(app()->getLocale() == 'uk') Кожен артбук у нашому асортименті проходить ретельну перевірку на наявність виробничих дефектів. Ми гарантуємо ідеальний стан видань. @elseif(app()->getLocale() == 'en') Every artbook in our range undergoes rigorous inspection for manufacturing defects. We guarantee the perfect condition of publications. @else Jedes Artbook in unserem Sortiment wird einer strengen Prüfung auf Herstellungsfehler unterzogen. Wir garantieren den einwandfreien Zustand der Publikationen. @endif
                     </p>
                 </div>
 
-                <div class="bg-gray-900/50 p-10 rounded-[2.5rem] border border-gray-800 hover:border-indigo-500/50 transition duration-500 group">
+                <div class="about-feature-card about-feature-card-soft bg-gray-900/50 p-10 rounded-[2.5rem] border border-gray-800 hover:border-indigo-500/50 transition duration-500 group">
                     <h3 class="text-xl font-black text-white uppercase tracking-tighter mb-4">@if(app()->getLocale() == 'uk') Експертне пакування @elseif(app()->getLocale() == 'en') Expert Packaging @else Expertenverpackung @endif</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm">
+                    <p class="about-feature-card-text text-gray-400 leading-relaxed text-sm">
                         @if(app()->getLocale() == 'uk') Ми розробили власну багаторівневу систему захисту книг під час транспортування, що мінімізує будь-які ризики пошкоджень. @elseif(app()->getLocale() == 'en') We have developed our own multi-level book protection system during transportation, which minimizes any risk of damage. @else Wir haben unser eigenes mehrstufiges Buchschutzsystem während des Transports entwickelt, das jedes Schadensrisiko minimiert. @endif
                     </p>
                 </div>
 
-                <div class="bg-gray-900/50 p-10 rounded-[2.5rem] border border-gray-800 hover:border-indigo-500/50 transition duration-500 group">
+                <div class="about-feature-card about-feature-card-soft bg-gray-900/50 p-10 rounded-[2.5rem] border border-gray-800 hover:border-indigo-500/50 transition duration-500 group">
                     <h3 class="text-xl font-black text-white uppercase tracking-tighter mb-4">@if(app()->getLocale() == 'uk') Професійний підхід @elseif(app()->getLocale() == 'en') Professional Approach @else Professioneller Ansatz @endif</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm">
+                    <p class="about-feature-card-text text-gray-400 leading-relaxed text-sm">
                         @if(app()->getLocale() == 'uk') Наш досвід дозволяє нам забезпечувати найвищий рівень сервісу: від професійної консультації до допомоги у пошуку рідкісних видань. @elseif(app()->getLocale() == 'en') Our experience allows us to provide the highest level of service: from professional consultation to assistance in finding rare publications. @else Unsere Erfahrung ermöglicht es uns, ein Höchstmaß an Service zu bieten: von der professionellen Beratung bis hin zur Unterstützung bei der Suche nach seltenen Publikationen. @endif
                     </p>
                 </div>
@@ -143,7 +143,7 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div class="bg-indigo-600 rounded-[3rem] p-12 lg:p-20 text-center relative overflow-hidden shadow-2xl shadow-indigo-500/20">
+        <div class="about-cta-preserve-dark bg-indigo-600 rounded-[3rem] p-12 lg:p-20 text-center relative overflow-hidden shadow-2xl shadow-indigo-500/20">
             <div class="relative z-10">
                 <h2 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-8">@if(app()->getLocale() == 'uk') Маєте запитання? @elseif(app()->getLocale() == 'en') Have Questions? @else Haben Sie Fragen? @endif</h2>
                 <p class="text-indigo-100 text-xl max-w-2xl mx-auto mb-12">

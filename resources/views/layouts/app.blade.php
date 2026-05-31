@@ -1,5 +1,8 @@
+@php
+    $themeStorageKey = request()->routeIs('admin.*') ? 'artbook-admin-theme' : 'artbook-shop-theme';
+@endphp
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme-key="{{ $themeStorageKey }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +14,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        (function () {
+            try {
+                var k = document.documentElement.getAttribute('data-theme-key');
+                if (!k) return;
+                var v = localStorage.getItem(k);
+                var root = document.documentElement;
+                if (v === 'light') {
+                    root.setAttribute('data-theme', 'light');
+                } else {
+                    root.removeAttribute('data-theme');
+                }
+            } catch (e) {}
+        })();
+    </script>
     <style>
         [x-cloak] { display: none !important; }
         .shared-bg {
@@ -59,8 +77,8 @@
             max-width: 420px;
             padding: 2.5rem 2rem;
             background: rgba(15, 23, 42, 0.75) !important;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(7px);
+            -webkit-backdrop-filter: blur(7px);
             border: 1px solid rgba(255, 255, 255, 0.12) !important;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
             border-radius: 18px;
@@ -245,6 +263,7 @@
             color: #94a3b8;
             text-align: center;
         }
+        /* Dark theme defaults; light theme overrides in resources/css/theme-light.css */
         @media (max-width: 480px) {
             .auth-bg .auth-page { padding: 9rem 3rem 12rem; }
             .auth-bg .auth-page .auth-card { max-width: 90%; padding: 2rem 1.25rem; }
@@ -254,7 +273,7 @@
     </style>
 </head>
 @if(request()->routeIs('login') || request()->routeIs('register') || request()->routeIs('password.request') || request()->routeIs('password.reset.form'))
-    <body class="text-gray-100 flex flex-col min-h-screen auth-bg">
+    <body class="text-gray-100 flex flex-col min-h-screen auth-bg @if(request()->routeIs('register')) auth-register @endif">
 @else
     <body class="text-gray-100 flex flex-col min-h-screen">
 @endif
@@ -283,6 +302,76 @@
     @include('components.footer')
     
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script>
+    (function () {
+        var root = document.documentElement;
+        var key = root.getAttribute('data-theme-key');
+        if (!key) return;
+        function getTheme() {
+            return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+        }
+        function setTheme(mode) {
+            if (mode === 'light') {
+                root.setAttribute('data-theme', 'light');
+            } else {
+                root.removeAttribute('data-theme');
+            }
+            try {
+                localStorage.setItem(key, mode);
+            } catch (e) {}
+            syncHeroVideo();
+            updateToggleButtons();
+        }
+        function syncHeroVideo() {
+            var video = document.getElementById('hero-bg-video');
+            if (!video) return;
+            var darkSrc = video.getAttribute('data-src-dark');
+            var lightSrc = video.getAttribute('data-src-light');
+            var next = getTheme() === 'light' ? lightSrc : darkSrc;
+            var source = video.querySelector('source');
+            if (!source || !next) return;
+            if (source.getAttribute('src') === next) return;
+            source.setAttribute('src', next);
+            video.load();
+        }
+        function updateToggleButtons() {
+            var light = getTheme() === 'light';
+            document.querySelectorAll('[data-theme-toggle]').forEach(function (btn) {
+                var moon = btn.querySelector('.theme-icon-moon');
+                var sun = btn.querySelector('.theme-icon-sun');
+                if (moon) moon.toggleAttribute('hidden', light);
+                if (sun) sun.toggleAttribute('hidden', !light);
+                btn.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+            });
+        }
+        window.addEventListener('storage', function (e) {
+            if (!key || e.key !== key || e.storageArea !== localStorage) {
+                return;
+            }
+            if (e.newValue === 'light') {
+                root.setAttribute('data-theme', 'light');
+            } else {
+                root.removeAttribute('data-theme');
+            }
+            syncHeroVideo();
+            updateToggleButtons();
+        });
+        function bind() {
+            document.querySelectorAll('[data-theme-toggle]').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    setTheme(getTheme() === 'light' ? 'dark' : 'light');
+                });
+            });
+            syncHeroVideo();
+            updateToggleButtons();
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', bind);
+        } else {
+            bind();
+        }
+    })();
+    </script>
     <script>
     window.phoneInvalidHint = @json(__('messages.phone_invalid'));
     (function() {

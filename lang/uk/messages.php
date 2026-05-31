@@ -110,4 +110,5 @@ return [
 'auth_code_placeholder' => 'Код',
 'auth_new_password_placeholder' => 'Новий пароль',
 'auth_update_password' => 'Оновити пароль',
+    'checkout_payment_abandoned' => 'Замовлення скасовано. Оберіть спосіб оплати ще раз.',
 ];

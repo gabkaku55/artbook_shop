@@ -108,4 +108,5 @@ return [
 'auth_code_placeholder' => 'Code',
 'auth_new_password_placeholder' => 'New password',
 'auth_update_password' => 'Update password',
+    'checkout_payment_abandoned' => 'Order cancelled. You can choose a payment method again.',
 ];

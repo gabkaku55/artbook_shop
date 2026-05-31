@@ -33,6 +33,10 @@
             </div>
 
             <div class="flex items-center space-x-4">
+                <button type="button" class="theme-toggle-btn" data-theme-toggle aria-label="Switch theme">
+                    <i class="fas fa-moon theme-icon-moon" aria-hidden="true"></i>
+                    <i class="fas fa-sun theme-icon-sun" aria-hidden="true" hidden></i>
+                </button>
                 <div class="relative" x-data="{ langOpen: false }">
                     <button @click="langOpen = !langOpen" class="flex items-center text-gray-300 hover:text-indigo-400 focus:outline-none">
                         <span class="uppercase">{{ app()->getLocale() }}</span>
