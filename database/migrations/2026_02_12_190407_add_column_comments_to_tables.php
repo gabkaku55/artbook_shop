@@ -6,13 +6,13 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    public bool $withinTransaction = false;
+
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        $db = config('database.connections.mysql.database');
-
         $alterations = [
             ['users', 'id', 'bigint unsigned', 'ID користувача'],
             ['users', 'name', 'varchar(255)', 'Ім\'я'],
@@ -67,14 +67,22 @@ return new class extends Migration
             ['wishlists', 'product_id', 'bigint unsigned', 'ID товару'],
         ];
 
+        $driver = Schema::getConnection()->getDriverName();
+
         foreach ($alterations as [$table, $column, $type, $comment]) {
             if (! Schema::hasTable($table) || ! Schema::hasColumn($table, $column)) {
                 continue;
             }
-            $commentEscaped = addslashes($comment);
+
             try {
-                DB::statement("ALTER TABLE `{$table}` MODIFY COLUMN `{$column}` {$type} COMMENT '{$commentEscaped}'");
-            } catch (\Throwable $e) {
+                if ($driver === 'mysql') {
+                    $commentEscaped = addslashes($comment);
+                    DB::statement("ALTER TABLE `{$table}` MODIFY COLUMN `{$column}` {$type} COMMENT '{$commentEscaped}'");
+                } elseif ($driver === 'pgsql') {
+                    $commentEscaped = str_replace("'", "''", $comment);
+                    DB::statement("COMMENT ON COLUMN \"{$table}\".\"{$column}\" IS '{$commentEscaped}'");
+                }
+            } catch (\Throwable) {
                 continue;
             }
         }
