@@ -1,6 +1,3 @@
-[build]
-buildCommand = "npm run build"
-
 [deploy]
 preDeployCommand = "chmod +x ./railway/init-app.sh && sh ./railway/init-app.sh"
 healthcheckPath = "/up"
