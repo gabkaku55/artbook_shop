@@ -91,9 +91,9 @@
                     <div>
                         <label class="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 ml-1">Обкладинка</label>
                         <div class="flex gap-6 items-start">
-                            @if($product->image)
+                            @if($product->image_url)
                                 <div class="w-24 h-32 flex-shrink-0 bg-gray-800 rounded-xl overflow-hidden border border-gray-700">
-                                    <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-full object-cover">
+                                    <img src="{{ $product->image_url }}" class="w-full h-full object-cover">
                                 </div>
                             @endif
                             <input type="file" name="image" class="w-full bg-gray-800 border-gray-700 rounded-2xl px-6 py-8 text-gray-400 focus:ring-2 focus:ring-indigo-500 transition border text-xs">

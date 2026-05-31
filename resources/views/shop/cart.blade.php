@@ -21,7 +21,7 @@
                         <div class="bg-gray-900 p-8 rounded-3xl border border-gray-800 flex flex-col sm:flex-row items-center gap-8 shadow-sm hover:border-gray-700 transition" data-cart-item="{{ $id }}">
                             <div class="w-32 h-44 flex-shrink-0 bg-gray-800 rounded-2xl overflow-hidden shadow-lg border border-gray-700">
                                 @if($details['image'])
-                                    <img src="{{ asset('storage/' . $details['image']) }}" class="w-full h-full object-cover">
+                                    <img src="{{ \App\Support\MediaUrl::resolve($details['image']) }}" class="w-full h-full object-cover">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center text-gray-700">
                                         <i class="fas fa-image text-3xl"></i>

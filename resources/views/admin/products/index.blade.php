@@ -28,8 +28,8 @@
                         <td class="px-8 py-6 font-black text-gray-600">#{{ $product->id }}</td>
                         <td class="px-8 py-6">
                             <div class="w-12 h-16 bg-gray-800 rounded-xl overflow-hidden border border-gray-700 shadow-sm">
-                                @if($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                                @if($product->image_url)
+                                    <img src="{{ $product->image_url }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                                 @endif
                             </div>
                         </td>

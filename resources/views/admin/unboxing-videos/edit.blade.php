@@ -25,7 +25,7 @@
         <div>
             <label class="block text-xs font-black uppercase tracking-widest text-gray-500 mb-2">Поточне відео</label>
             <video controls class="w-full max-w-md rounded-xl border border-gray-700 bg-gray-950">
-                <source src="{{ asset($unboxingVideo->video_path) }}">
+                <source src="{{ $unboxingVideo->video_url }}">
             </video>
         </div>
         <div>

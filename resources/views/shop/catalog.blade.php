@@ -61,8 +61,8 @@
                             <div class="catalog-product-card bg-gray-900 rounded-2xl shadow-lg border border-gray-800 overflow-hidden hover:border-indigo-500/30 transition duration-300">
                                 <a href="{{ route('product.show', $product->slug) }}">
                                     <div class="relative aspect-[3/4]">
-                                        @if($product->image)
-                                            <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-full object-cover" alt="{{ $product->translated_name }}">
+                    @if($product->image_url)
+                        <img src="{{ $product->image_url }}" class="w-full h-full object-cover" alt="{{ $product->translated_name }}">
                                         @else
                                             <div class="w-full h-full flex items-center justify-center bg-gray-800 text-gray-600">
                                                 <i class="fas fa-image text-4xl opacity-20"></i>

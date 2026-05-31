@@ -6,8 +6,8 @@
         <div class="flex flex-col md:flex-row gap-12">
             <div class="w-full md:w-1/2">
                 <div class="rounded-3xl overflow-hidden bg-gray-900 aspect-[3/4] mb-6 shadow-2xl border border-gray-800">
-                    @if($product->image)
-                        <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-full object-cover" alt="{{ $product->translated_name }}">
+                    @if($product->image_url)
+                        <img src="{{ $product->image_url }}" class="w-full h-full object-cover" alt="{{ $product->translated_name }}">
                     @else
                         <div class="w-full h-full flex items-center justify-center text-gray-700 bg-gray-900">
                             <i class="fas fa-image text-6xl opacity-20"></i>
@@ -18,7 +18,7 @@
                     @if($product->gallery)
                         @foreach($product->gallery as $image)
                             <div class="aspect-square rounded-xl overflow-hidden bg-gray-900 border border-gray-800 hover:border-indigo-500 transition cursor-pointer shadow-sm">
-                                <img src="{{ asset('storage/' . $image) }}" class="w-full h-full object-cover">
+                                <img src="{{ \App\Support\MediaUrl::resolve($image) }}" class="w-full h-full object-cover">
                             </div>
                         @endforeach
                     @endif
@@ -153,8 +153,8 @@
                     @foreach($similarProducts as $similar)
                         <div class="group cursor-pointer" onclick="window.location='{{ route('product.show', $similar->slug) }}'">
                             <div class="relative overflow-hidden rounded-2xl bg-gray-800 aspect-[3/4] mb-4 shadow-lg group-hover:shadow-indigo-500/10 transition duration-500">
-                                @if($similar->image)
-                                    <img src="{{ asset('storage/' . $similar->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="{{ $similar->translated_name }}">
+                                @if($similar->image_url)
+                                    <img src="{{ $similar->image_url }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="{{ $similar->translated_name }}">
                                 @endif
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end p-4">
                                     <span class="text-white font-bold text-sm">{{ __('messages.details') }}</span>

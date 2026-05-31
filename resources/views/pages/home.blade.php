@@ -81,8 +81,8 @@
                     <div class="swiper-slide">
                         <div class="group home-product-card">
                             <div class="relative overflow-hidden rounded-2xl bg-gray-800 aspect-[3/4] mb-6 shadow-lg group-hover:shadow-indigo-500/10 transition duration-500">
-                                @if($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="{{ $product->translated_name }}">
+                                @if($product->image_url)
+                                    <img src="{{ $product->image_url }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="{{ $product->translated_name }}">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center text-gray-600 bg-gray-800">
                                         <i class="fas fa-image text-4xl opacity-20"></i>
@@ -159,8 +159,8 @@
                     <div class="swiper-slide">
                         <div class="group home-product-card">
                             <div class="relative overflow-hidden rounded-2xl bg-gray-800 aspect-[3/4] mb-6 shadow-lg group-hover:shadow-indigo-500/10 transition duration-500">
-                                @if($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="{{ $product->translated_name }}">
+                                @if($product->image_url)
+                                    <img src="{{ $product->image_url }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="{{ $product->translated_name }}">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center text-gray-600 bg-gray-800">
                                         <i class="fas fa-image text-4xl opacity-20"></i>
@@ -230,7 +230,7 @@
                     class="home-unboxing-card flex-shrink-0 w-[min(88vw,20.5rem)] sm:w-[min(75vw,24rem)] md:w-[26rem] snap-start bg-gray-900 rounded-[2rem] overflow-hidden border border-gray-800 group">
                     <div class="relative aspect-video">
                         <video class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition" controls>
-                            <source src="{{ asset($video->video_path) }}">
+                            <source src="{{ $video->video_url }}">
                         </video>
                         <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-60"></div>
                     </div>

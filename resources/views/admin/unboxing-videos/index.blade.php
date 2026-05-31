@@ -26,7 +26,7 @@
                         <td class="px-8 py-6 font-black text-gray-600">#{{ $video->id }}</td>
                         <td class="px-8 py-6">
                             <video class="w-28 h-16 rounded-xl border border-gray-700 object-cover bg-gray-950" preload="metadata" muted>
-                                <source src="{{ asset($video->video_path) }}">
+                                <source src="{{ $video->video_url }}">
                             </video>
                         </td>
                         <td class="px-8 py-6">

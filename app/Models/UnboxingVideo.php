@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\MediaUrl;
 use Illuminate\Database\Eloquent\Model;
 
 class UnboxingVideo extends Model
@@ -11,6 +12,11 @@ class UnboxingVideo extends Model
         'description',
         'video_path',
     ];
+
+    public function getVideoUrlAttribute(): ?string
+    {
+        return MediaUrl::resolvePublic($this->video_path);
+    }
 
     public static function legacyDefaults(): array
     {

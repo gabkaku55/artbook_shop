@@ -8,7 +8,6 @@ use App\Models\UnboxingVideo;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class CatalogImportSeeder extends Seeder
@@ -17,8 +16,6 @@ class CatalogImportSeeder extends Seeder
 
     public function run(): void
     {
-        $this->syncMediaFiles();
-
         User::firstOrCreate(
             ['email' => 'yanapampukha2006@gmail.com'],
             [
@@ -85,32 +82,5 @@ class CatalogImportSeeder extends Seeder
         }
 
         UnboxingVideo::syncLegacyDefaults();
-    }
-
-    private function syncMediaFiles(): void
-    {
-        $sourceRoot = database_path('media');
-        if (! is_dir($sourceRoot)) {
-            return;
-        }
-
-        $this->copyDirectory("{$sourceRoot}/products", storage_path('app/public/products'));
-        $this->copyDirectory("{$sourceRoot}/video", public_path('video'));
-    }
-
-    private function copyDirectory(string $from, string $to): void
-    {
-        if (! is_dir($from)) {
-            return;
-        }
-
-        File::ensureDirectoryExists($to);
-
-        foreach (File::files($from) as $file) {
-            $target = $to . DIRECTORY_SEPARATOR . $file->getFilename();
-            if (! file_exists($target)) {
-                File::copy($file->getPathname(), $target);
-            }
-        }
     }
 }

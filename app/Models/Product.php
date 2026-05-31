@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\MediaUrl;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -104,6 +105,11 @@ class Product extends Model
             'EUR' => '€' . number_format($converted, 2),
             default => number_format($converted, 2) . ' грн',
         };
+    }
+
+    public function getImageUrlAttribute(): ?string
+    {
+        return MediaUrl::resolve($this->image);
     }
 
     public function category()

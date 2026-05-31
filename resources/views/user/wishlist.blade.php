@@ -22,8 +22,8 @@
                     <div class="bg-gray-900 rounded-3xl border border-gray-800 overflow-hidden shadow-xl hover:border-indigo-500/30 transition duration-300 flex flex-col group">
                         <div class="relative aspect-[3/4]">
                             <a href="{{ route('product.show', $item->product->slug) }}" class="block w-full h-full overflow-hidden">
-                                @if($item->product->image)
-                                    <img src="{{ asset('storage/' . $item->product->image) }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="{{ $item->product->translated_name }}">
+                                @if($item->product->image_url)
+                                    <img src="{{ $item->product->image_url }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="{{ $item->product->translated_name }}">
                                 @endif
                             </a>
                             <form action="{{ route('wishlist.remove', $item->product->id) }}" method="POST" class="absolute top-4 right-4">
