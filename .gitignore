@@ -19,6 +19,7 @@
 /public/video
 /storage/*.key
 /storage/pail
+/storage/app/temp-export
 /vendor
 Homestead.json
 Homestead.yaml

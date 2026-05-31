@@ -3,7 +3,7 @@ set -e
 
 php artisan config:clear
 php artisan migrate --force
-php artisan db:seed --force
+php artisan db:seed --class=CatalogImportSeeder --force
 php artisan storage:link --force
 php artisan optimize:clear
 php artisan config:cache
